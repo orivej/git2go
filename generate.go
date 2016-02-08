@@ -1,0 +1,3 @@
+//go:generate ./script/build-libgit2-static.sh
+//go:generate ./script/with-static.sh go install ./...
+package git
