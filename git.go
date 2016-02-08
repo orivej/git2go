@@ -3,7 +3,7 @@ package git
 /*
 #include <git2.h>
 #include <git2/sys/openssl.h>
-#cgo pkg-config: libgit2
+#cgo pkg-config: vendor/libgit2/build/libgit2.pc
 */
 import "C"
 import (
