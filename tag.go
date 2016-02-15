@@ -54,7 +54,7 @@ type TagsCollection struct {
 }
 
 func (c *TagsCollection) Create(
-	name string, commit *Commit, tagger *Signature, message string) (*Oid, error) {
+	name string, commit *Commit, tagger *Signature, message string, force bool) (*Oid, error) {
 
 	oid := new(Oid)
 
@@ -75,7 +75,7 @@ func (c *TagsCollection) Create(
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
-	ret := C.git_tag_create(oid.toC(), c.repo.ptr, cname, ctarget, taggerSig, cmessage, 0)
+	ret := C.git_tag_create(oid.toC(), c.repo.ptr, cname, ctarget, taggerSig, cmessage, cbool(force))
 	if ret < 0 {
 		return nil, MakeGitError(ret)
 	}
